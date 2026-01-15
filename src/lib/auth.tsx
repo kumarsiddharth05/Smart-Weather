@@ -97,7 +97,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signUp = async (email: string, password: string, fullName: string, role: UserRole = 'student') => {
-    const redirectUrl = `${window.location.origin}/`;
+    // Get the current URL without query parameters or hash, to ensure we redirect back to the correct path (handling subdirectories like /Smart-Weather/)
+    const redirectUrl = window.location.href.split('?')[0].split('#')[0];
     
     const { error } = await supabase.auth.signUp({
       email,

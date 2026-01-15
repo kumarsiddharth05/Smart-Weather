@@ -17,5 +17,11 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
     storage: localStorage,
     persistSession: true,
     autoRefreshToken: true,
+    detectSessionInUrl: true,
   }
 });
+
+// Helper to check if we are using real credentials
+export const isSupabaseConfigured = () => {
+  return !SUPABASE_URL.includes('placeholder') && !SUPABASE_PUBLISHABLE_KEY.includes('placeholder');
+};
